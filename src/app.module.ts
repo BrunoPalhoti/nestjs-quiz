@@ -17,6 +17,8 @@ import { QuizModule } from './modules/quiz/quiz.module';
       database: process.env.DATABASE,
       autoLoadEntities: true,
       synchronize: true,
+      logging: true,
+      logger: 'advanced-console',
     }),
     QuizModule,
   ],
