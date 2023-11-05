@@ -1,10 +1,12 @@
 import {
   Body,
+  Param,
   Controller,
   Get,
   Post,
   UsePipes,
   ValidationPipe,
+  ParseIntPipe,
 } from '@nestjs/common';
 import { QuizService } from '../services/quiz.service';
 import { CreateQuizDto } from '../dto/create-quiz.dto';
@@ -17,6 +19,11 @@ export class QuizController {
   @Get('/')
   async getAllQuiz(): Promise<Quiz[]> {
     return await this.quizService.getAllQuiz();
+  }
+
+  @Get('/:id')
+  async getQuizById(@Param('id', ParseIntPipe) id: number): Promise<Quiz> {
+    return await this.quizService.getQuizById(id);
   }
 
   @Post('/create')

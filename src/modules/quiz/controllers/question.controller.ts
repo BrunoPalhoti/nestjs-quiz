@@ -1,16 +1,22 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CreateQuestionDto } from '../dto/create-question.dto';
 import { QuestionService } from '../services/question.service';
-import { Question } from '../entities/question.entity';
+import { QuizService } from '../services/quiz.service';
 
 @Controller('question')
 export class QuestionController {
-  constructor(private questionService: QuestionService) {}
+  constructor(
+    private questionService: QuestionService,
+    private quizService: QuizService,
+  ) {}
 
   @Post('')
-  async saveQuestion(
+  async createQuestion(
     @Body() questionData: CreateQuestionDto,
-  ): Promise<Question> {
-    return await this.questionService.saveQuestion(questionData);
+  ): Promise<CreateQuestionDto> {
+    const quiz = await this.quizService.getQuizById(questionData.quizId);
+    if (quiz) {
+      return await this.questionService.createQuestion(questionData, quiz);
+    }
   }
 }
