@@ -12,7 +12,7 @@ export class QuestionService {
     private readonly questionRepository: Repository<Question>,
   ) {}
 
-  saveQuestion(questionData: CreateQuestionDto): Promise<Question> {
-    return this.questionRepository.save(questionData);
+  async saveQuestion(questionData: CreateQuestionDto): Promise<Question> {
+    return await this.questionRepository.save(questionData);
   }
 }

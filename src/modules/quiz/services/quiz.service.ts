@@ -12,11 +12,11 @@ export class QuizService {
     private readonly quizRepository: Repository<Quiz>,
   ) {}
 
-  getAllQuiz(): Promise<Quiz[]> {
-    return this.quizRepository.find();
+  async getAllQuiz(): Promise<Quiz[]> {
+    return await this.quizRepository.find();
   }
 
-  createQuiz(quizData: CreateQuizDto): Promise<Quiz> {
-    return this.quizRepository.save(quizData);
+  async createQuiz(quizData: CreateQuizDto): Promise<Quiz> {
+    return await this.quizRepository.save(quizData);
   }
 }

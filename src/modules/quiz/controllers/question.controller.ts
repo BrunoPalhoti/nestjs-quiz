@@ -8,7 +8,9 @@ export class QuestionController {
   constructor(private questionService: QuestionService) {}
 
   @Post('')
-  saveQuestion(@Body() questionData: CreateQuestionDto): Promise<Question> {
-    return this.questionService.saveQuestion(questionData);
+  async saveQuestion(
+    @Body() questionData: CreateQuestionDto,
+  ): Promise<Question> {
+    return await this.questionService.saveQuestion(questionData);
   }
 }

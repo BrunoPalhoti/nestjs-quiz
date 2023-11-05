@@ -15,13 +15,13 @@ export class QuizController {
   constructor(private quizService: QuizService) {}
 
   @Get('/')
-  getAllQuiz(): Promise<Quiz[]> {
-    return this.quizService.getAllQuiz();
+  async getAllQuiz(): Promise<Quiz[]> {
+    return await this.quizService.getAllQuiz();
   }
 
   @Post('/create')
   @UsePipes(ValidationPipe)
-  createQuiz(@Body() quizData: CreateQuizDto): Promise<Quiz> {
-    return this.quizService.createQuiz(quizData);
+  async createQuiz(@Body() quizData: CreateQuizDto): Promise<Quiz> {
+    return await this.quizService.createQuiz(quizData);
   }
 }
