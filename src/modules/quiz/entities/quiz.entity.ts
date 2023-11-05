@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+import { Question } from './question.entity';
 
 @Entity('quizes')
 export class Quiz {
@@ -15,4 +16,7 @@ export class Quiz {
 
   @Column({ type: 'boolean', default: 1 })
   isActive: boolean;
+
+  @OneToMany(() => Question, (question) => question.quiz)
+  questions: Question[];
 }
