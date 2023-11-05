@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Quiz } from '../entities/quiz.entity';
-import { CreateQuizDto } from '../dto/CreateQuiz.dto';
+import { CreateQuizDto } from '../dto/create-quiz.dto';
 
 @Injectable()
 export class QuizService {
@@ -12,11 +12,11 @@ export class QuizService {
     private readonly quizRepository: Repository<Quiz>,
   ) {}
 
-  getAllQuiz(): Promise<CreateQuizDto[]> {
+  getAllQuiz(): Promise<Quiz[]> {
     return this.quizRepository.find();
   }
 
-  createQuiz(quizData: CreateQuizDto): Promise<CreateQuizDto> {
+  createQuiz(quizData: CreateQuizDto): Promise<Quiz> {
     return this.quizRepository.save(quizData);
   }
 }
