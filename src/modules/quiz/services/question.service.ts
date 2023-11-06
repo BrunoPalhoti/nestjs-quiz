@@ -13,6 +13,19 @@ export class QuestionService {
     private readonly questionRepository: Repository<Question>,
   ) {}
 
+  async getAllQuestions(): Promise<Question[]> {
+    return await this.questionRepository
+      .createQueryBuilder('questions')
+      .leftJoinAndSelect('questions.quiz', 'quiz')
+      .select([
+        'questions.id',
+        'questions.question',
+        'quiz.id',
+        'quiz.isActive',
+      ])
+      .getMany();
+  }
+
   async createQuestion(
     questionData: CreateQuestionDto,
     quiz: Quiz,
