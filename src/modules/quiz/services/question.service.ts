@@ -26,6 +26,13 @@ export class QuestionService {
       .getMany();
   }
 
+  async findQuestionById(id: number): Promise<Question> {
+    return await this.questionRepository.findOne({
+      where: { id },
+      relations: ['quiz', 'options'],
+    });
+  }
+
   async createQuestion(
     questionData: CreateQuestionDto,
     quiz: Quiz,
